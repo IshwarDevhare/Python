@@ -31,21 +31,27 @@ while True:
             window['todos'].update(values = todos)
             window['todo'].update(value='')
         case "Edit":
-            todo_to_edit = values['todos'][0]
-            new_todo = values['todo']
+            try:
+                todo_to_edit = values['todos'][0]
+                new_todo = values['todo']
 
-            todos = functions.get_todos()
-            index = todos.index(todo_to_edit)
-            todos[index] = new_todo
-            functions.write_todos(todos)
-            window['todo'].update(value='')
+                todos = functions.get_todos()
+                index = todos.index(todo_to_edit)
+                todos[index] = new_todo
+                functions.write_todos(todos)
+                window['todo'].update(value='')
+            except IndexError:
+                sg.popup("please select an item")
         case "Complete":
-            todo_to_complete = values["todos"][0]
-            todos = functions.get_todos()
-            todos.remove(todo_to_complete)
-            functions.write_todos(todos)
-            window['todos'].update(values = todos)
-            window['todo'].update(value='')
+            try:
+                todo_to_complete = values["todos"][0]
+                todos = functions.get_todos()
+                todos.remove(todo_to_complete)
+                functions.write_todos(todos)
+                window['todos'].update(values = todos)
+                window['todo'].update(value='')
+            except:
+                sg.popup("select item to complete")
         case "Exit":
             break
         case 'todos':
