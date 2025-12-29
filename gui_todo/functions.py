@@ -1,9 +1,11 @@
 import os
+import sys
 
-FILEPATH = FILEPATH = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    "todos.txt"
-)
+FILEPATH = "todos.txt"
+
+if not os.path.exists(FILEPATH):
+    with open(FILEPATH, "w") as file:
+        pass
 
 def get_todos(filepath = FILEPATH):
     """
